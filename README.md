@@ -84,15 +84,21 @@ flutter pub get
 flutter run
 ```
 
-The app reads the API address from [`mobile/assets/config/app_config.json`](mobile/assets/config/app_config.json):
+By default the app talks to the **deployed API at `https://irontank.onrender.com/api/v1`**, so `flutter run` works without running the backend locally. The address is set in [`mobile/assets/config/app_config.json`](mobile/assets/config/app_config.json).
 
-| Where the app runs | `apiBaseUrl` |
+> The API runs on Render's free tier, which sleeps when idle. The first request after a quiet period can take up to a minute while it wakes up, so the app's timeouts allow for that.
+
+To use a **local** backend instead, pass its address when you run the app (or edit the config file):
+
+| Where the app runs | Local `API_BASE_URL` |
 |---|---|
-| Android emulator (default) | `http://10.0.2.2:4000/api/v1` |
+| Android emulator | `http://10.0.2.2:4000/api/v1` |
 | iOS simulator | `http://localhost:4000/api/v1` |
 | Physical phone on the same Wi-Fi | `http://<your-computer's-LAN-IP>:4000/api/v1` |
 
-You can also override it without editing the file: `flutter run --dart-define=API_BASE_URL=http://192.168.1.20:4000/api/v1`.
+```bash
+flutter run --dart-define=API_BASE_URL=http://10.0.2.2:4000/api/v1
+```
 
 ## Tests
 

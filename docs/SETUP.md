@@ -92,11 +92,15 @@ flutter run              # pick the emulator/simulator/device when asked
 
 ### Pointing the app at your API
 
-The app reads `mobile/assets/config/app_config.json`:
+The app reads `mobile/assets/config/app_config.json`. By default it points at the deployed API on Render:
 
 ```json
-{ "apiBaseUrl": "http://10.0.2.2:4000/api/v1", "connectTimeoutSeconds": 10, "receiveTimeoutSeconds": 20 }
+{ "apiBaseUrl": "https://irontank.onrender.com/api/v1", "connectTimeoutSeconds": 30, "receiveTimeoutSeconds": 75 }
 ```
+
+The long timeouts are deliberate. Render's free tier sleeps after about 15 minutes without traffic, and the first request then waits up to a minute for the service to wake.
+
+To develop against a **local** backend, use one of these addresses:
 
 | Device | URL to use |
 |---|---|

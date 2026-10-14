@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "IronRank gym tracking API",
   "type": "module",
-  "main": "src/server.js",
+  "main": "server.js",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "node --watch src/server.js",
+    "start": "node server.js",
+    "dev": "node --watch server.js",
     "dev:memory": "node scripts/devMemory.js",
     "seed": "node src/seed/index.js",
     "seed:exercises": "node src/seed/index.js exercises",

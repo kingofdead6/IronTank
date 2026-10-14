@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Runtime configuration read from `assets/config/app_config.json`.
 ///
-/// The API URL can also be overridden at build time:
-/// `flutter run --dart-define=API_BASE_URL=http://192.168.1.20:4000/api/v1`
+/// Defaults to the deployed API. For a local backend, override at build time:
+/// `flutter run --dart-define=API_BASE_URL=http://10.0.2.2:4000/api/v1`
 class AppConfig {
   const AppConfig({
     required this.apiBaseUrl,
@@ -14,8 +14,8 @@ class AppConfig {
     required this.receiveTimeout,
   });
 
-  /// Android emulator's alias for the host machine's localhost.
-  static const defaultApiBaseUrl = 'http://10.0.2.2:4000/api/v1';
+  /// Production API (Render). Used if the config asset is missing.
+  static const defaultApiBaseUrl = 'https://irontank.onrender.com/api/v1';
   static const _assetPath = 'assets/config/app_config.json';
   static const _dartDefineUrl = String.fromEnvironment('API_BASE_URL');
 
@@ -33,8 +33,9 @@ class AppConfig {
     final fromFile = json['apiBaseUrl'] as String?;
     return AppConfig(
       apiBaseUrl: _dartDefineUrl.isNotEmpty ? _dartDefineUrl : (fromFile ?? defaultApiBaseUrl),
-      connectTimeout: Duration(seconds: (json['connectTimeoutSeconds'] as num?)?.toInt() ?? 10),
-      receiveTimeout: Duration(seconds: (json['receiveTimeoutSeconds'] as num?)?.toInt() ?? 20),
+      // Render's free tier sleeps when idle; the first request can take ~60 s to wake it.
+      connectTimeout: Duration(seconds: (json['connectTimeoutSeconds'] as num?)?.toInt() ?? 30),
+      receiveTimeout: Duration(seconds: (json['receiveTimeoutSeconds'] as num?)?.toInt() ?? 75),
     );
   }
 }

@@ -26,7 +26,7 @@ export async function start(mongoUri) {
   return server;
 }
 
-// Run directly: `node src/server.js`
+// Run directly: `node server.js`
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   start().catch((err) => {
     console.error(err.message);

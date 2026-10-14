@@ -10,7 +10,7 @@ const mongo = await MongoMemoryServer.create();
 const uri = mongo.getUri('ironrank');
 console.log(`In-memory MongoDB at ${uri}`);
 
-const { start } = await import('../src/server.js');
+const { start } = await import('../server.js');
 await start(uri);
 
 try {
