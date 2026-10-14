@@ -1,7 +1,7 @@
 import { pathToFileURL } from 'node:url';
-import { createApp } from './app.js';
-import { connectDb, disconnectDb } from './config/db.js';
-import { env } from './config/env.js';
+import { createApp } from './src/app.js';
+import { connectDb, disconnectDb } from './src/config/db.js';
+import { env } from './src/config/env.js';
 
 /**
  * Boots the API. `mongoUri` lets scripts (e.g. the in-memory dev server)
