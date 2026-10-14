@@ -1,0 +1,14 @@
+# Secrets — never commit real credentials
+backend/.env
+
+# Dependencies & build output
+backend/node_modules/
+backend/coverage/
+mobile/build/
+mobile/.dart_tool/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
