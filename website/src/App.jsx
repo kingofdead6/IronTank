@@ -1,25 +1,38 @@
-import Features from './components/Features';
-import FinalCta from './components/FinalCta';
+import { useEffect } from 'react';
 import Footer from './components/Footer';
-import Gallery from './components/Gallery';
-import Hero from './components/Hero';
-import Install from './components/Install';
 import Navbar from './components/Navbar';
-import Ranks from './components/Ranks';
-import Stats from './components/Stats';
+import ScrollProgress from './components/ScrollProgress';
+import { policies } from './content/policies';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
+import PolicyPage from './pages/PolicyPage';
+import { useRoute } from './router';
+
+const titles = { '/': 'IronRank — Lift. Log. Level up.' };
 
 export default function App() {
+  const { path, anchor } = useRoute();
+  const slug = path.replace(/^\//, '');
+  const isPolicy = slug in policies;
+  const page = path === '/' ? <Home /> : isPolicy ? <PolicyPage slug={slug} /> : <NotFound />;
+
+  // Page title, then scroll: to the requested section, or to the top on a new page.
+  useEffect(() => {
+    document.title = titles[path] ?? (isPolicy ? `${policies[slug].title} — IronRank` : 'Lost in orbit — IronRank');
+    if (anchor) {
+      requestAnimationFrame(() => document.getElementById(anchor)?.scrollIntoView({ behavior: 'smooth' }));
+    } else {
+      window.scrollTo({ top: 0 });
+    }
+  }, [path, anchor, slug, isPolicy]);
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-ink font-sans">
+      <ScrollProgress />
       <Navbar />
-      <main>
-        <Hero />
-        <Stats />
-        <Features />
-        <Ranks />
-        <Gallery />
-        <Install />
-        <FinalCta />
+      {/* Keyed so each page plays its entrance animation. */}
+      <main key={path} className="animate-page-in">
+        {page}
       </main>
       <Footer />
     </div>

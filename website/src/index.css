@@ -20,6 +20,9 @@
   --animate-glow: glow 2.6s ease-in-out infinite;
   --animate-spin-slow: spin 14s linear infinite;
   --animate-gradient: gradient 8s ease infinite;
+  --animate-twinkle: twinkle 4s ease-in-out infinite;
+  --animate-breathe: breathe 7s ease-in-out infinite;
+  --animate-page-in: reveal-in 0.6s cubic-bezier(0.2, 0, 0, 1) both;
 }
 
 /* Keyframes (global so inline-style animations can use them too). */
@@ -47,6 +50,14 @@
 @keyframes gradient {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+@keyframes breathe {
+  0%, 100% { opacity: 0.75; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.02); }
 }
 @keyframes reveal-in {
   from { opacity: 0; transform: translateY(26px); filter: blur(6px); }
@@ -86,6 +97,47 @@
     background-size: 56px 56px;
     mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 30%, transparent 75%);
   }
+}
+
+/* ---- Custom scrollbar --------------------------------------------------
+   A glowing orange→magenta capsule floating in a dark track. Chromium/Safari
+   use the ::-webkit-scrollbar styles; Firefox gets the closest equivalent. */
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, #0a0a0e, #111117 50%, #0a0a0e);
+  border-left: 1px solid rgb(255 255 255 / 0.04);
+}
+::-webkit-scrollbar-thumb {
+  /* The transparent border + padding-box clip makes the thumb a floating pill. */
+  background: linear-gradient(180deg, #ffb36b 0%, var(--color-flame) 30%, var(--color-magenta) 100%) padding-box;
+  border: 4px solid transparent;
+  border-radius: 999px;
+  box-shadow: inset 0 0 6px rgb(255 255 255 / 0.25);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ffd0a0 0%, #ff7a2e 30%, #ff4fa0 100%) padding-box;
+  border-width: 3px;
+}
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, #fff 0%, #ff8a3d 25%, #ff2e88 100%) padding-box;
+}
+::-webkit-scrollbar-corner {
+  background: #0a0a0e;
+}
+/* Firefox (and browsers without ::-webkit-scrollbar) */
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-magenta) #0a0a0e;
+  }
+}
+/* Text selection in brand colours. */
+::selection {
+  background: rgb(255 46 136 / 0.35);
+  color: #fff;
 }
 
 /* Scroll-reveal: elements start hidden and animate in when they enter the viewport. */

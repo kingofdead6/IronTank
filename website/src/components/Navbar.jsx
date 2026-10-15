@@ -25,7 +25,7 @@ export default function Navbar() {
           scrolled ? 'glass shadow-2xl shadow-black/40' : 'bg-transparent'
         }`}
       >
-        <a href="#top" className="group flex items-center gap-2.5">
+        <a href="#top" className="group flex items-center gap-2.5" aria-label="IronRank home">
           <img src="./icon.png" alt="" className="h-9 w-9 rounded-xl transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110" />
           <span className="font-display text-lg font-bold tracking-wider">
             IRON<span className="text-brand">RANK</span>
