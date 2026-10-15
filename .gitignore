@@ -12,3 +12,5 @@ mobile/.dart_tool/
 Thumbs.db
 .idea/
 .vscode/
+website/node_modules/
+website/dist/
