@@ -123,7 +123,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar, sitting on the planet surface */}
-        <div className="absolute inset-x-0 bottom-0 z-10 px-6 pb-8">
+        <div className="absolute inset-x-0 bottom-0 z-10 px-6 pb-24 md:pb-8">
           <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 text-sm text-white/45 md:flex-row">
             <p>© {new Date().getFullYear()} IronRank. Built for lifters, on this planet.</p>
             <p>Calorie and strength figures are estimates, not medical advice.</p>
