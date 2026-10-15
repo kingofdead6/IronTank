@@ -10,7 +10,7 @@ export const DOWNLOAD_URL = 'https://irontankapp.vercel.app/irontank.apk';
 //
 //  Optional details shown next to the download button.
 export const APP_VERSION = '1.0.0';
-export const APP_SIZE = ''; // e.g. '24 MB'
+export const APP_SIZE = '22 MB';
 export const MIN_ANDROID = 'Android 7.0+';
 //
 //  Contact address shown in the policies (privacy requests, support).
